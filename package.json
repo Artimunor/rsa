@@ -1,11 +1,19 @@
 {
   "name": "rsa",
   "version": "1.0.0",
-  "description": "",
+  "description": "examples of cryptographic functions used by rsa",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc -w -pretty",
+    "exe": "node build/index.js"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Daniel de Witte",
+  "license": "MIT",
+  "dependencies": {
+    "@types/inquirer": "0.0.43",
+    "inquirer": "^6.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.0.3"
+  }
 }
