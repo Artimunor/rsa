@@ -49,7 +49,7 @@ export class CryptoMath {
  
         let x: Array<number> = [0, 1];
         let q: Array<number> = [];
-        let i = 0, a_tmp = a, b_tmp = b;
+        let i = 0, a_tmp = a, b_tmp2, b_tmp = b;
 
         if (b_tmp != 0) {
 
@@ -62,8 +62,11 @@ export class CryptoMath {
                 }
 
                 i++;
-                a_tmp = b_tmp;
+                console.log("a",a_tmp,"b",b_tmp);
+                b_tmp2 = b_tmp
                 b_tmp = a_tmp % b_tmp;
+                a_tmp = b_tmp2
+                console.log("a", a_tmp, "b", b_tmp, "a%b", a_tmp % b_tmp);
             } 
         }
 
