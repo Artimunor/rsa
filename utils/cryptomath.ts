@@ -46,39 +46,36 @@ export class CryptoMath {
     }
 
     public static extendedEuclidianAlgorithm(a:number, b:number) : number {
- 
-        let x: Array<number> = [0, 1];
-        let q: Array<number> = [];
-        let i = 0, a_tmp = a, b_tmp2, b_tmp = b;
 
-        if (b_tmp != 0) {
+        let p1,p2 = 0;
 
-            while (a_tmp % b_tmp != 0) {
-
-                q[i] = Math.floor(a_tmp / b_tmp); 
-
-                if (i > 1) {
-                    x[i] = (x[i - 2] - x[i - 1] * q[i - 2] + a * a) % a ;
-                }
-
-                i++;
-                console.log("a",a_tmp,"b",b_tmp);
-                b_tmp2 = b_tmp
-                b_tmp = a_tmp % b_tmp;
-                a_tmp = b_tmp2
-                console.log("a", a_tmp, "b", b_tmp, "a%b", a_tmp % b_tmp);
-            } 
+        if ( b > a) {
+            p1 = b;
+            p2 = a;
+        } else {
+            p1 = a;
+            p2 = b;
         }
 
-        x[i] = (x[i - 2] - x[i - 1] * q[i - 2] + a * a) % a;
-        console.log("x[" + i + "] =", x[i - 2], "-", x[i - 1], "*", q[i - 2], "mod", a, "=", x[i]);
+        let x: Array<number> = [1,0];
+        let y: Array<number> = [0,1];
 
-        if(a_tmp == 1) {
-            console.log("The Inverse of " + b + " mod " + a + " is " + x[i] + ". \nCheck: " + b + "*" + x[i] + " mod " + a + " = " + (b * x[i]) % a + " || d = " + q[i - 1]);
-            return x[i];
-        } else {
-            console.log("No inverse since gcd(" + b + "," + a + ") != 1."); 
-            return 0;
-        } 
+        let z1: number = x[0] * p1 + y[0] * p2; 
+        let z2: number = x[1] * p1 + y[1] * p2;
+
+        let q: number = Math.floor(z1 / z2);
+        let i: number = 1;
+
+        while (z2 != 1) {
+
+            i++;
+            x[i] = x[i - 2] - x[i - 1] * q; 
+            y[i] = y[i - 2] - y[i - 1] * q;
+            z1 = z2; 
+            z2 = x[i] * p1 + y[i] * p2;
+            q = Math.floor(z1 / z2);
+        }
+
+        return y[i]
     }
 }
